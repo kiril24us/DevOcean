@@ -2,16 +2,15 @@
 {
     public class Family : Spaceship
     {
-        public int Tax { get; set; } = 5000;
+        public Family(int yearOfPurchase, int milesTraveled) : base(yearOfPurchase, milesTraveled)
+        {
 
-        public int YearOfPurchase { get; set; }
+        }
 
-        public int YearOfCalculation { get; set; }
+        public override int Tax { get; protected set; } = 5000;
 
-        public int Miles { get; set; }
+        public override int TaxIncreaser { get; protected set; } = 100;
 
-        public int TaxIncreaser { get; set; } = 100;
-
-        public int TaxDecreaser { get; set; } = 355;
+        public override int TaxDecreaser { get; protected set; } = 355;
     }
 }

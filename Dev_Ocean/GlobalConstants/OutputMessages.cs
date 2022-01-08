@@ -12,6 +12,6 @@
 
         public const string YearOfTaxCalculation = "Enter the year of the tax calculation";
 
-        public const string MilesTraveled = "Enter the miles traveled";
+        public const string MilesTraveled = "Enter the miles traveled"; 
     }
 }

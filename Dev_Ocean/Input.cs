@@ -38,13 +38,13 @@ namespace DevOcean_Task
             switch (spaceshipType)
             {
                 case "cargo":
-                    spaceship = new Cargo();
-                    result = _spaceshipsService.CalculateTax(spaceship, yearOfPurchase, yearOfTaxCalculation, milesTraveled);
+                    spaceship = new Cargo(yearOfPurchase,milesTraveled);
+                    result = _spaceshipsService.CalculateTax(spaceship, yearOfTaxCalculation);
                     break;
 
                 case "family":
-                    spaceship = new Family();
-                    result = _spaceshipsService.CalculateTax(spaceship, yearOfPurchase, yearOfTaxCalculation, milesTraveled);
+                    spaceship = new Family(yearOfPurchase, milesTraveled);
+                    result = _spaceshipsService.CalculateTax(spaceship, yearOfTaxCalculation);
                     break;
 
                 default:

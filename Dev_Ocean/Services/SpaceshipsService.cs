@@ -4,14 +4,9 @@ namespace DevOcean.Services
 {
     public class SpaceshipsService : ISpaceshipsService
     {
-        public double CalculateTax(Spaceship spaceship, int startYear, int endYear, int miles)
+        public double CalculateTax(Spaceship spaceship, int yearOfCalculation)
         {
-
-            spaceship.Miles = miles;
-            spaceship.YearOfPurchase = startYear;
-            spaceship.YearOfCalculation = endYear;
-
-            return spaceship.Tax + (spaceship.Miles / 1000) * spaceship.TaxIncreaser - (endYear - startYear) * spaceship.TaxDecreaser;
+            return spaceship.Tax + (spaceship.MilesTraveled / 1000) * spaceship.TaxIncreaser - (yearOfCalculation - spaceship.YearOfPurchase) * spaceship.TaxDecreaser;
 
         }
     }

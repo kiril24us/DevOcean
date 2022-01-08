@@ -1,17 +1,30 @@
 ﻿namespace DevOcean.Models
 {
-    public interface Spaceship
+    public abstract class Spaceship
     {
-        public int Tax { get; set; }
+        protected readonly int _milesTraveled;
+        protected readonly int _yearOfPurchase;
 
-        public int YearOfPurchase { get; set; }
+        protected Spaceship(int yearOfPurchase, int milesTraveled)
+        {
+            _yearOfPurchase = yearOfPurchase;
+            _milesTraveled = milesTraveled;
+        }
 
-        public int YearOfCalculation { get; set; }
+        public int MilesTraveled
+        {
+            get { return _milesTraveled; }
+        }
 
-        public int Miles { get; set; }
+        public int YearOfPurchase
+        {
+            get { return _yearOfPurchase; }
+        }
 
-        public int TaxIncreaser { get; set; }
+        public virtual int Tax { get; protected set; }
 
-        public int TaxDecreaser { get; set; }
+        public virtual int TaxIncreaser { get; protected set; }
+
+        public virtual int TaxDecreaser { get; protected set; }
     }
 }

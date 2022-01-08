@@ -2,16 +2,15 @@
 {
     public class Cargo : Spaceship
     {
-        public int Tax { get; set; } = 10000;
+        public Cargo(int yearOfPurchase, int milesTraveled) : base(yearOfPurchase, milesTraveled)
+        {
 
-        public int YearOfPurchase { get; set; }
+        }
 
-        public int YearOfCalculation { get; set; }
+        public override int Tax { get; protected set; } = 10000;
 
-        public int Miles { get; set; }
+        public override int TaxIncreaser { get; protected set; } = 1000;
 
-        public int TaxIncreaser { get; set; } = 1000;
-
-        public int TaxDecreaser { get; set; } = 736;
+        public override int TaxDecreaser { get; protected set; } = 736;
     }
 }
