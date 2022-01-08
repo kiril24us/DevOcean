@@ -3,6 +3,7 @@ using DevOcean.Services;
 using System;
 
 using static DevOcean.GlobalConstants.OutputMessages;
+using static DevOcean.GlobalConstants.SpaceshipTypes;
 
 namespace DevOcean_Task
 {
@@ -19,18 +20,42 @@ namespace DevOcean_Task
         {
             Console.WriteLine(WelcomeMessage);
             Console.WriteLine(SpaceshipType);
-            string spaceshipType = Console.ReadLine();
+            string spaceshipType = Console.ReadLine().ToLower();
+
+            while (spaceshipType != SpaceshipCargo && spaceshipType != SpaceshipFamily)
+            {
+                Console.WriteLine(WrongSpaceshipType);
+                spaceshipType = Console.ReadLine().ToLower();
+            }
             Console.WriteLine(ConfirmationMessage);
 
             Console.WriteLine(YearOfPurchase);
             int yearOfPurchase = int.Parse(Console.ReadLine());
+
+            while (yearOfPurchase < 0)
+            {
+                Console.WriteLine(InvalidYearOfPurchaseValue);
+                yearOfPurchase = int.Parse(Console.ReadLine());
+            }
             Console.WriteLine(ConfirmationMessage);
 
             Console.WriteLine(YearOfTaxCalculation);
             int yearOfTaxCalculation = int.Parse(Console.ReadLine());
 
+            while (yearOfTaxCalculation < 0)
+            {
+                Console.WriteLine(InvalidYearOfTaxCalculationValue);
+                yearOfTaxCalculation = int.Parse(Console.ReadLine());
+            }
+
             Console.WriteLine(MilesTraveled);
             int milesTraveled = int.Parse(Console.ReadLine());
+
+            while (milesTraveled < 0)
+            {
+                Console.WriteLine(InvalidMilesTraveledValue);
+                milesTraveled = int.Parse(Console.ReadLine());
+            }
 
             double result;
             Spaceship spaceship;

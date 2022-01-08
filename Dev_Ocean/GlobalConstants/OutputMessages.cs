@@ -12,6 +12,21 @@
 
         public const string YearOfTaxCalculation = "Enter the year of the tax calculation";
 
-        public const string MilesTraveled = "Enter the miles traveled"; 
+        public const string MilesTraveled = "Enter the miles traveled";
+
+        public const string WrongSpaceshipType = "Wrong spaceship type! Please enter cargo or family!";
+
+        public const string InvalidYearOfPurchaseValue = "Invalid value! The year of purchase cannot be a negative number!";
+
+        public const string InvalidYearOfTaxCalculationValue = "Invalid value! The year of tax calculation cannot be a negative number!";
+
+        public const string InvalidMilesTraveledValue = "Invalid value! Miles traveled cannot be a negative number!";
+    }
+
+    public static class SpaceshipTypes
+    {
+        public const string SpaceshipCargo = "cargo";
+
+        public const string SpaceshipFamily = "family";
     }
 }
