@@ -7,7 +7,6 @@ namespace DevOcean.Services
         public int CalculateTax(Spaceship spaceship, int yearOfCalculation)
         {
             return spaceship.Tax + (spaceship.MilesTraveled / 1000) * spaceship.TaxIncreaser - (yearOfCalculation - spaceship.YearOfPurchase) * spaceship.TaxDecreaser;
-
         }
     }
 }

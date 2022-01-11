@@ -1,19 +1,21 @@
-﻿using DevOcean.Models;
+﻿using Dev_Ocean.Validation;
+using DevOcean.Models;
 using DevOcean.Services;
 using System;
 
 using static DevOcean.GlobalConstants.OutputMessages;
-using static DevOcean.GlobalConstants.SpaceshipTypes;
 
 namespace DevOcean_Task
 {
     public class Input
     {
         private readonly ISpaceshipsService _spaceshipsService;
+        private readonly IInputValidation _inputValidation;
 
-        public Input(ISpaceshipsService spaceshipsService)
+        public Input(ISpaceshipsService spaceshipsService, IInputValidation inputValidation)
         {
             _spaceshipsService = spaceshipsService;
+            _inputValidation = inputValidation;
         }
 
         public void ReadInput()
@@ -22,40 +24,19 @@ namespace DevOcean_Task
             Console.WriteLine(SpaceshipType);
             string spaceshipType = Console.ReadLine().ToLower();
 
-            while (spaceshipType != SpaceshipCargo && spaceshipType != SpaceshipFamily)
-            {
-                Console.WriteLine(WrongSpaceshipType);
-                spaceshipType = Console.ReadLine().ToLower();
-            }
-            Console.WriteLine(ConfirmationMessage);
+            spaceshipType = _inputValidation.ValidationSpaceshipType(spaceshipType);           
 
             Console.WriteLine(YearOfPurchase);
-            int yearOfPurchase = int.Parse(Console.ReadLine());
-
-            while (yearOfPurchase < 0)
-            {
-                Console.WriteLine(InvalidYearOfPurchaseValue);
-                yearOfPurchase = int.Parse(Console.ReadLine());
-            }
-            Console.WriteLine(ConfirmationMessage);
+            string yearOfPurchaseAsString = Console.ReadLine();
+            int yearOfPurchase = _inputValidation.ValidationTheInputNumber(yearOfPurchaseAsString);
 
             Console.WriteLine(YearOfTaxCalculation);
-            int yearOfTaxCalculation = int.Parse(Console.ReadLine());
-
-            while (yearOfTaxCalculation < 0)
-            {
-                Console.WriteLine(InvalidYearOfTaxCalculationValue);
-                yearOfTaxCalculation = int.Parse(Console.ReadLine());
-            }
+            string yearOfTaxCalculationAsString = Console.ReadLine();
+            int yearOfTaxCalculation = _inputValidation.ValidationTheInputNumber(yearOfTaxCalculationAsString);
 
             Console.WriteLine(MilesTraveled);
-            int milesTraveled = int.Parse(Console.ReadLine());
-
-            while (milesTraveled < 0)
-            {
-                Console.WriteLine(InvalidMilesTraveledValue);
-                milesTraveled = int.Parse(Console.ReadLine());
-            }
+            string milesTraveledAsString = Console.ReadLine();
+            int milesTraveled = _inputValidation.ValidationTheInputNumber(milesTraveledAsString);
 
             double result;
             Spaceship spaceship;
@@ -63,7 +44,7 @@ namespace DevOcean_Task
             switch (spaceshipType)
             {
                 case "cargo":
-                    spaceship = new Cargo(yearOfPurchase,milesTraveled);
+                    spaceship = new Cargo(yearOfPurchase, milesTraveled);
                     result = _spaceshipsService.CalculateTax(spaceship, yearOfTaxCalculation);
                     break;
 
@@ -76,7 +57,15 @@ namespace DevOcean_Task
                     throw new Exception();
             }
 
-            Console.WriteLine(result);
+            if(result > 0)
+            {
+                Console.WriteLine(YouOweMessage);
+                Console.Write(result);
+            }
+            else
+            {
+                Console.Write(RedCardMessage);
+            }           
         }
     }
 }
